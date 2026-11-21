@@ -15,6 +15,8 @@ const locations = [
 
 const rideStages = ["Accepted", "Arriving at Pickup", "Passenger Picked Up", "Ride Started", "Completed"];
 const vehicleRates = { Car: 1, SUV: 1.4, Van: 1.65 };
+const apiUrlMeta = document.querySelector('meta[name="hunza-api-url"]');
+const API_BASE_URL = String(window.HUNZA_API_URL || apiUrlMeta?.content || "").replace(/\/$/, "");
 const state = {
     role: "passenger",
     authMode: "login",
@@ -42,7 +44,11 @@ async function apiRequest(path, options = {}) {
         headers.Authorization = `Bearer ${sessionToken}`;
     }
 
-    const response = await fetch(path, { ...options, headers });
+    if (!API_BASE_URL && window.location.hostname.endsWith("github.io")) {
+        throw new Error("Account service is unavailable. Deploy the Hunza Rider backend and set hunza-api-url.");
+    }
+
+    const response = await fetch(API_BASE_URL + path, { ...options, headers });
     const payload = await response.json().catch(function() {
         return {};
     });

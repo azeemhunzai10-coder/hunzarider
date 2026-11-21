@@ -1,0 +1,24 @@
+{
+  "name": "hunza-rider-backend",
+  "version": "1.0.0",
+  "description": "Express API and static frontend for the Hunza Rider project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "hunza",
+    "rides",
+    "express",
+    "backend"
+  ],
+  "author": "Copilot",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
